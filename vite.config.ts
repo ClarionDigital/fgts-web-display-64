@@ -6,8 +6,9 @@ import path from "path";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
-    host: "::",
-    port: 8080,
+    host: "localhost",
+    port: 3000,
+    open: true,
   },
   plugins: [
     react(),
@@ -19,7 +20,7 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     outDir: 'dist',
-    sourcemap: false,
+    sourcemap: mode === 'development',
     chunkSizeWarningLimit: 1000,
   },
 }));

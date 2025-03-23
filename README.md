@@ -1,69 +1,77 @@
-# Welcome to your Lovable project
 
-## Project info
+# Projeto FGTS
 
-**URL**: https://lovable.dev/projects/f5488dcd-886c-486f-a1b6-62be611e6d5a
+## Como executar o projeto localmente
 
-## How can I edit this code?
+Para executar este projeto em seu ambiente local, siga estas etapas:
 
-There are several ways of editing your application.
+1. **Clone o repositório**
+   ```bash
+   git clone https://github.com/SEU-USUARIO/SEU-REPOSITORIO.git
+   cd SEU-REPOSITORIO
+   ```
 
-**Use Lovable**
+2. **Instale as dependências**
+   ```bash
+   npm install
+   ```
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/f5488dcd-886c-486f-a1b6-62be611e6d5a) and start prompting.
+3. **Execute o servidor de desenvolvimento**
+   ```bash
+   npm run dev
+   ```
+   O projeto será executado em `http://localhost:3000`
 
-Changes made via Lovable will be committed automatically to this repo.
+4. **Para construir para produção**
+   ```bash
+   npm run build
+   ```
+   
+   Os arquivos de produção serão gerados na pasta `dist`
 
-**Use your preferred IDE**
+5. **Para executar a versão de produção localmente**
+   ```bash
+   npm run preview
+   ```
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Configuração do servidor em produção
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Para implantar em um servidor de produção, você deve:
 
-Follow these steps:
+1. Executar `npm run build` para gerar os arquivos otimizados
+2. Copiar todo o conteúdo da pasta `dist` para a pasta raiz do seu servidor web
+3. Configurar o servidor para redirecionar todas as requisições para o arquivo `index.html` (necessário para o React Router funcionar)
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+### Exemplo de configuração para Nginx:
+```nginx
+server {
+    listen 80;
+    server_name seu-dominio.com;
+    root /caminho/para/pasta/dist;
+    
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}
 ```
 
-**Edit a file directly in GitHub**
+### Exemplo de configuração com arquivo .htaccess para Apache:
+```apache
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with .
-
+## Tecnologias utilizadas
 - Vite
 - TypeScript
 - React
+- React Router
 - shadcn-ui
 - Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/f5488dcd-886c-486f-a1b6-62be611e6d5a) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+- Framer Motion
