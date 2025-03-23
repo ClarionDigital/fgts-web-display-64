@@ -7,8 +7,11 @@ import path from "path";
 export default defineConfig(({ mode }) => ({
   server: {
     host: "localhost",
-    port: 3000,
+    port: 8080,
     open: true,
+    headers: {
+      "Content-Type": "text/javascript"
+    }
   },
   plugins: [
     react(),
